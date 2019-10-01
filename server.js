@@ -12,7 +12,7 @@ app.use(helmet())
 app.use(cors())
 
 app.use(function validateBearerToken(req, res, next) {
-    const apiToken = process.env.API_Token
+    const apiToken = process.env.API_TOKEN
     const authToken = req.get('Authorization')
     if (!authToken || authToken.split(' ')[1] !== apiToken) {
         return res.status(401).json({ error: 'Unauthorized request' })
@@ -21,7 +21,7 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 app.get('/movies', function handleGetMovies(req, res) {
-    let response = MOVIES;
+    let response = MOVIES
     
     if (req.query.genre) {
         response = response.filter(movie => 
@@ -35,9 +35,9 @@ app.get('/movies', function handleGetMovies(req, res) {
         )
     }
 
-    if (req.query.avgVotes) {
+    if (req.query.avg_votes) {
         response = response.filter(movie => 
-            Number(movie.avg_vote) >= Number(req.query.avgVotes)
+            Number(movie.avg_vote) >= Number(req.query.avg_votes)
         )
     }
 
